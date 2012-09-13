@@ -7,6 +7,7 @@ import org.vertx.java.core.http.HttpServer;
 import org.vertx.java.core.http.HttpServerRequest;
 import org.vertx.java.core.http.RouteMatcher;
 import org.vertx.java.core.json.JsonArray;
+import org.vertx.java.core.json.JsonObject;
 import org.vertx.java.deploy.Verticle;
 
 
@@ -52,8 +53,10 @@ public class Server extends Verticle {
 		routeMatcher.get("/users", new Handler<HttpServerRequest>(){
 			@Override
 			public void handle(HttpServerRequest req) {
+				JsonObject object = new JsonObject();
 				JsonArray json = new JsonArray(users);
-				req.response.end(json.encode());
+				object.putArray("users", json);
+				req.response.end(object.encode());
 				
 			}
 			
