@@ -7,10 +7,30 @@ function init(){
 }
 	
 var angle = 0;
+var shrink = true;
+var maxAngle = 65;
 function rotateDiv(){
-	angle+=5;
+
+	if(angle > maxAngle){
+		shrink = true;
+	}
+
+	if(angle < 0){
+		shrink = false;
+	}
+	if(shrink){
+		angle-=1;
+	}else{
+		angle+=1;
+	}
 	$("#chatWindow").css("transform", "rotateX(" + angle+ "deg)");
 	$("#inputBox").css("transform", "rotateX(" + angle+ "deg)");
+
+	var maxOffset = 300;
+	$("#chatWindow").offset({left:(maxOffset+maxOffset*Math.sin((360/maxAngle)*(angle)/50))} )
+	$("#inputBox").offset({left:(maxOffset+maxOffset*Math.sin((360/maxAngle)*(angle)/50))} )
+
+
 }
 
 function pollServer(){
