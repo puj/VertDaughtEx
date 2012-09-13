@@ -1,3 +1,5 @@
+
+
 public class UrlHandler {
 
 	public static String resolve(String url) {
