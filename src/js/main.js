@@ -3,8 +3,15 @@ function init(){
 	$("#inputBox").focus();
 	$("#inputBox").width($("#chatWindow").width());
 	setInterval(pollServer,500);	
+	setInterval(rotateDiv,30);
 }
 	
+var angle = 0;
+function rotateDiv(){
+	angle+=5;
+	$("#chatWindow").css("transform", "rotateX(" + angle+ "deg)");
+	$("#inputBox").css("transform", "rotateX(" + angle+ "deg)");
+}
 
 function pollServer(){
 
@@ -43,7 +50,6 @@ function showUsers(data){
 	setTitle();
 	
 	var userObj = $.parseJSON(data.responseText);
-	console.log(userObj);
 	if(!data || !data.responseText || !userObj ){
 		chatWindow.append("No users connected...");
 		return;
