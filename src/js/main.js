@@ -41,16 +41,20 @@ function showUsers(data){
 	var chatWindow = $("#chatWindow");
 	chatWindow.empty();
 	setTitle();
-
-	if(!data || !data.users || data.users.length == 0){
+	
+	var userObj = $.parseJSON(data.responseText);
+	console.log(userObj);
+	if(!data || !data.responseText || !userObj ){
 		chatWindow.append("No users connected...");
 		return;
 	}
 
-	var userList = data.users;
+
+
+	var userList = userObj.users;
 	var userListString = "";
 	for(var user in userList){
-		userListString += (user + (user == userList[userList.length-1]?"":", "));
+		userListString += (userList[user] + (user == userList.length-1?"":", "));
 	}
 	chatWindow.append(userList.length + " user(s) connected : "  + userListString);
 }
