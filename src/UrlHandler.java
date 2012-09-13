@@ -1,25 +1,44 @@
+import java.io.File;
+
 
 
 public class UrlHandler {
 
 	public static String resolve(String url) {
 		if(url == null){
-			System.out.println("im null");
+			System.out.println("FUCK");
 			throw new IllegalArgumentException();
 		}
 
 		switch(url){
 		case "":
-			System.out.println("im the empty string");
 			return "index.html";
 		case "/":
-			System.out.println("im the slash");
 			return "index.html";
 		case "/favicon.ico":
-			System.out.println("im the favicon");
 			return "";
+		case "/chat":
+			return "chat.html";
 		default:
-			return "404.html";
+			url = url.substring(1);
+			boolean authenticatedAsIs = doAuthenticationHere(url);
+			if(authenticatedAsIs){
+				return url;
+			}else{
+				return "404.html";
+			}
 		}
 	}
+
+	private static boolean doAuthenticationHere(String url) {
+		
+		if((new File(url)).exists()){
+			System.err.println(url + " exists");
+			return true;
+		}
+		System.err.println(url + " does not exist");
+		return false;
+	}
+	
+	
 }
