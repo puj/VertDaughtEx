@@ -9,13 +9,6 @@ import org.vertx.java.deploy.Verticle;
 
 public class Server extends Verticle {
 
-	private static Set<String> urls;
-	
-	static {
-		urls = new HashSet<>();
-		urls.add("/");
-	}
-
 	public void start() {
 		vertx.createHttpServer().requestHandler(new Handler<HttpServerRequest>() {
 				public void handle(HttpServerRequest req) {
