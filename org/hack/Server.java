@@ -1,5 +1,3 @@
-package org.hack;
-
 import org.hack.UrlHandler;
 import org.vertx.java.core.Handler;
 import org.vertx.java.core.http.HttpServerRequest;
