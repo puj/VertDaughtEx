@@ -1,7 +1,13 @@
 <html>
-	<body>
+	<head>
+		<LINK href="css/main.css" rel="stylesheet" type="text/css">
+		<script type="text/javascript" src="js/main.js"></script>
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.1.min.js"></script>
+	</head>
+	<body onload="init()">
 		<div id="chatWindow">
-			
 		</div>
+		<input type="text" id="inputBox" onkeypress="handleKeyPress(event)">
+		</input>	
 	</body>
 </html>

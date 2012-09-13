@@ -2,4 +2,24 @@
 	width:50%;
 	height:70%;
 	float:center;
+	background-image: linear-gradient(bottom, rgb(60,32,120) 27%, rgb(0,0,0) 64%, rgb(24,143,143) 82%);
+	background-image: -o-linear-gradient(bottom, rgb(60,32,120) 27%, rgb(0,0,0) 64%, rgb(24,143,143) 82%);
+	background-image: -moz-linear-gradient(bottom, rgb(60,32,120) 27%, rgb(0,0,0) 64%, rgb(24,143,143) 82%);
+	background-image: -webkit-linear-gradient(bottom, rgb(60,32,120) 27%, rgb(0,0,0) 64%, rgb(24,143,143) 82%);
+	background-image: -ms-linear-gradient(bottom, rgb(60,32,120) 27%, rgb(0,0,0) 64%, rgb(24,143,143) 82%);
+
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0.27, rgb(60,32,120)),
+		color-stop(0.64, rgb(0,0,0)),
+		color-stop(0.82, rgb(24,143,143))
+	);
+	color:#99FF22;
+}
+
+#inputBox{
+	border:0;
+	background: #FF0000;
 }
