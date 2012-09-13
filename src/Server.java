@@ -63,7 +63,7 @@ public class Server extends Verticle {
 			
 			@Override
 			public void handle(HttpServerRequest req) {
-				req.response.sendFile(req.params().get("filename"));
+				req.response.sendFile("js/" + req.params().get("filename"));
 			}
 			
 		});
@@ -72,7 +72,7 @@ routeMatcher.get("/css/:filename", new Handler<HttpServerRequest>(){
 			
 			@Override
 			public void handle(HttpServerRequest req) {
-				req.response.sendFile(req.params().get("filename"));
+				req.response.sendFile("css/" + req.params().get("filename"));
 			}
 			
 		});
