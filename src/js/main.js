@@ -7,8 +7,10 @@ function init(){
 	
 
 function pollServer(){
-	$.getJSON({
-		url:"/users",
+
+	$.ajax({
+	  url: "/users",
+	  dataType: 'json'
 	}).complete(showUsers);
 }
 
