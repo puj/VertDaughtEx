@@ -11,8 +11,6 @@ import org.vertx.java.deploy.Verticle;
 
 public class Server extends Verticle {
 
-	private static List<Object> users = new ArrayList<>();
-
 	public void start() {
 		HttpServer server = vertx.createHttpServer();
 		RouteMatcher routeMatcher = new RouteMatcher();
@@ -33,7 +31,7 @@ public class Server extends Verticle {
 
 			@Override
 			public void handle(HttpServerRequest req) {
-				users.add(req.params().get("nick"));
+				UserController.getInstance().addUser(req.params().get("nick"));
 				sendRedirect(req, "/chat");
 			}
 
@@ -53,7 +51,7 @@ public class Server extends Verticle {
 			@Override
 			public void handle(HttpServerRequest req) {
 				JsonObject object = new JsonObject();
-				JsonArray json = new JsonArray(users);
+				JsonArray json = new JsonArray(UserController.getInstance().getUsersAsObjectList());
 				object.putArray("users", json);
 				req.response.headers().put("Content-Type","application/json");
 				req.response.end(object.encode());

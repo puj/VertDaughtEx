@@ -3,34 +3,6 @@ function init(){
 	$("#inputBox").focus();
 	$("#inputBox").width($("#chatWindow").width());
 	setInterval(pollServer,500);	
-	setInterval(rotateDiv,30);
-}
-	
-var angle = 0;
-var shrink = true;
-var maxAngle = 65;
-function rotateDiv(){
-
-	if(angle > maxAngle){
-		shrink = true;
-	}
-
-	if(angle < 0){
-		shrink = false;
-	}
-	if(shrink){
-		angle-=1;
-	}else{
-		angle+=1;
-	}
-	$("#chatWindow").css("transform", "rotateX(" + angle+ "deg)");
-	$("#inputBox").css("transform", "rotateX(" + angle+ "deg)");
-
-	var maxOffset = 300;
-	$("#chatWindow").offset({left:(maxOffset+maxOffset*Math.sin((360/maxAngle)*(angle)/50))} )
-	$("#inputBox").offset({left:(maxOffset+maxOffset*Math.sin((360/maxAngle)*(angle)/50))} )
-
-
 }
 
 function pollServer(){
@@ -80,7 +52,7 @@ function showUsers(data){
 	var userList = userObj.users;
 	var userListString = "";
 	for(var user in userList){
-		userListString += (userList[user] + (user == userList.length-1?"":", "));
+		userListString += (userList[user].name + (user == userList.length-1?"":", "));
 	}
 	chatWindow.append(userList.length + " user(s) connected : "  + userListString);
 }
