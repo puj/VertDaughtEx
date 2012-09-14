@@ -20,7 +20,7 @@ public class UserController {
 		return instance;
 	}
 	
-	public void addUser(String username){
+	public User addUser(String username){
 		User newUser = new User(username);
 		if(userList.contains(newUser)){
 			log(logtag  + ": Username (" + username + ") already in use");
@@ -28,6 +28,7 @@ public class UserController {
 			userList.add(newUser);
 			log(logtag  + ": Username now in userlist");
 		}
+		return newUser;
 	}
 	
 	//TODO make a logmanager or some shit
@@ -36,6 +37,27 @@ public class UserController {
 	}
 
 	public Object[] getUsersAsObjectList() {
-		return userList.toArray();
+		String[] userNames = new String[userList.size()];
+		int i = 0 ;
+		for(User user : userList){
+			userNames[i++] = user.getName();
+		}
+		return userNames;
+	}
+
+	public void broadcast(User fromUser, String message) {
+		for(User user : userList){
+			user.bufferChatMessage(fromUser, message);
+		}
+	}
+	
+	public static User lookupUserByCookie(String cookieLookupValue) {
+		for(User user : getInstance().userList){
+			
+			if(user.getCookie().compareTo(cookieLookupValue) == 0){
+				return user;
+			}
+		}
+		return null;
 	}
 }

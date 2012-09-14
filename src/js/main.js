@@ -1,5 +1,6 @@
 
 function init(){
+	setTitle();
 	$("#inputBox").focus();
 	$("#inputBox").width($("#chatWindow").width());
 	setInterval(pollServer,500);	
@@ -7,10 +8,11 @@ function init(){
 
 function pollServer(){
 
+
 	$.ajax({
-	  url: "/users",
+	  url: "/updates",
 	  dataType: 'json'
-	}).complete(showUsers);
+	}).complete(showMessages);
 }
 
 function sendMessage(){
@@ -52,7 +54,7 @@ function showUsers(data){
 	var userList = userObj.users;
 	var userListString = "";
 	for(var user in userList){
-		userListString += (userList[user].name + (user == userList.length-1?"":", "));
+		userListString += (userList[user] + (user == userList.length-1?"":", "));
 	}
 	chatWindow.append(userList.length + " user(s) connected : "  + userListString);
 }
@@ -62,4 +64,19 @@ function handleKeyPress(e){
 	if (key==13){
 		sendMessage();
 	}
+}
+
+function showMessages(data){
+	var chatWindow = $("#chatWindow");
+
+	var messageObj = $.parseJSON(data.responseText);
+	var messages = messageObj.messages;
+	
+	for(var m in messages){
+		console.log(messages[m].username);
+		var username = messages[m].username?messages[m].username:'Unknown';
+		var messageData = messages[m].messageData?messages[m].messageData:'Unknown';
+		chatWindow.append(username + " : " + messageData + "<br>");
+	}
+	
 }
