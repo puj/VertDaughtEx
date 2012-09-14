@@ -23,7 +23,7 @@ public class UserController {
 	public void addUser(String username){
 		User newUser = new User(username);
 		if(userList.contains(newUser)){
-			log(logtag  + ": Username (" + username + " alreader in use");
+			log(logtag  + ": Username (" + username + ") already in use");
 		}else{
 			userList.add(newUser);
 			log(logtag  + ": Username now in userlist");
